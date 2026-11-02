@@ -1,0 +1,23 @@
+name: Generate Isometric Commit Calendar
+
+on:
+  # Запуск по расписанию: каждый день в полночь
+  schedule:
+    - cron: "0 0 * * *"
+  # Кнопка для ручного запуска в интерфейсе
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Isometric calendar
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: metrics.plugin.isocalendar.svg
+          base: ""
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
